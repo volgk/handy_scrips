@@ -16,30 +16,30 @@ tshark  -r $1 -Tfields             \
         -e eap.leap.peer_challenge \
         -e eap.leap.peer_response  \
         "eap.leap.peer_challenge || eap.leap.peer_response"\
-		| prettify
+        | prettify
 
 echo "Searching MSCHAP-v2 credentials..."
 tshark  -r $1 -Tfields \
-		-e chap.name   \
-		-e chap.value  \
-		-e chap.value  \
-		"chap.code == 1  ||  chap.code == 2" \
-		| prettify
+        -e chap.name   \
+        -e chap.value  \
+        -e chap.value  \
+        "chap.code == 1  ||  chap.code == 2" \
+        | prettify
 
 echo "Searching PPP credentials (user | index | challenge value)..."
 tshark -r $1 -Tfields     \
        -e chap.name       \
-	   -e chap.identifier \
-	   -e chap.value      \
-	   "chap.code == 2 || chap.code == 1"
+       -e chap.identifier \
+       -e chap.value      \
+       "chap.code == 2 || chap.code == 1"
 
 echo "Searching RADIUS credentials (code | id | length | response authenticator | attributes )"
 tshark  -r $1 -Tfields \
-		-e radius.code          \
-		-e radius.id            \
-		-e radius.length        \
-		-e radius.authenticator \
-		-e radius.State         \
-		"radius"
+        -e radius.code          \
+        -e radius.id            \
+        -e radius.length        \
+        -e radius.authenticator \
+        -e radius.State         \
+        "radius"
 
 # End of file
