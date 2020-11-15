@@ -1,0 +1,4 @@
+#!/bin/sh
+
+youtube-dl --ignore-config -o - 'https://www.youtube.com/watch?v=tzBGEqkwCoY' \
+               | mpv - > ~/fallout-radio.log

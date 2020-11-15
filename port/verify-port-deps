@@ -1,0 +1,11 @@
+#!/bin/sh
+
+prtverify -m missing-deps         \
+          -c /usr/ports/vccrux    \
+          -c /usr/ports/compat-32 \
+          -c /usr/ports/contrib   \
+          -c /usr/ports/core      \
+          -c /usr/ports/opt       \
+          -c /usr/ports/xorg $1
+
+                           

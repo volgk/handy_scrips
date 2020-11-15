@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Find port dependences for $(basename $PWD)...\n"
+
+finddeps `basename $PWD` | cut -d' ' -f1 | sed -e '/\(glib\|binutils\|gcc\)/d' | xargs

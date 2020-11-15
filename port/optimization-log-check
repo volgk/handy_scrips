@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# $1: port name
+
+LOG_PATH="/var/log/pkgbuild"
+
+grep "\-pipe" -R LOG_PATH/$1
+grep "\-O0" -R LOG_PATH/$1
+grep "\-O1" -R LOG_PATH/$1
+grep "\-O2" -R LOG_PATH/$1
+grep "\-O3" -R LOG_PATH/$1
+grep "\-Os" -R LOG_PATH/$1
+grep "\-Ofast" -R LOG_PATH/$1
+grep "\-g" -R LOG_PATH/$1
+grep "\-g0" -R LOG_PATH/$1
+grep "\-g1" -R LOG_PATH/$1
+grep "\-g2" -R LOG_PATH/$1
+grep "\-g3" -R LOG_PATH/$1

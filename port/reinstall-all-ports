@@ -1,0 +1,6 @@
+#!/bin/sh
+
+ALL_PORTS=$(pkginfo -i | awk -F' ' '{ print $1}')
+
+echo "[!] Need superuser"
+prt-get update -f -vv $ALL_PORTS
