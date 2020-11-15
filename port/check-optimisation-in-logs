@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# $1: port name
+
+LOG_PATH="/var/log/pkgbuild"
+
+grep --color=always " \-pipe \| \-O0 \| \-O1 \| \-O3 \| \-Os \|        \
+	             \ -Ofast \| \-g \| \-g0 \| \-g1 \| \-g2 \| \-g3 " \
+		     -R $LOG_PATH/$1.log | less
