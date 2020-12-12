@@ -1,0 +1,38 @@
+#!/usr/bin/env perl
+# wtf -- Urban dictionary command-line utility.
+# coded by chinarulezzz.
+
+use strict;
+use warnings;
+use diagnostics;
+
+use HTTP::Tiny;
+use JSON::PP;
+
+sub usage() { print "$0 <term> | fmt | less\n" and exit }
+
+my $APIURL = 'http://api.urbandictionary.com/v0/define?term=';
+
+my $term   = $ARGV[0] || die usage();
+my $json   = JSON::PP->new();
+$json->escape_slash(1);
+
+my $resp   = HTTP::Tiny->new->get($APIURL.$term);
+die "Failed!\n" unless $resp->{success};
+die "No content!\n" unless length $resp->{content};
+
+my $hash  = $json->decode( $resp->{content} );
+
+for my $item ($hash->{list}->@*) {
+	print "[ $item->{word} ]\n";
+	for my $line (split /[\r\n]/, $item->{definition}) {
+		next unless length $line;
+		print "  $line\n";
+	}
+	print "\n  Example:\n";
+	for my $line (split /[\r\n]/, $item->{example}) {
+		next unless length $line;
+		print "  $line\n";
+	}
+	print "\n\n";
+}
